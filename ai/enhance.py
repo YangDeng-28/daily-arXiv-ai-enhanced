@@ -175,11 +175,12 @@ def process_all_items(data: List[Dict], model_name: str, language: str, max_work
     model=model_name,
     api_key=os.environ.get("OPENAI_API_KEY"),
     base_url=os.environ.get("OPENAI_BASE_URL"),
-    extra_body={
-        "thinking": {
-            "type": "disabled"
-        }
-    }
+    temperature=0,
+    # extra_body={
+    #     "thinking": {
+    #         "type": "disabled"
+    #     }
+    # }
     ).with_structured_output(Structure, method="function_calling")
     print('Connect to:', model_name, file=sys.stderr)
     
