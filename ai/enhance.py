@@ -173,16 +173,13 @@ def process_all_items(data: List[Dict], model_name: str, language: str, max_work
     #     ).with_structured_output(Structure, method="function_calling")
     llm = ChatOpenAI(
     model=model_name,
-    api_key=os.getenv("OPENAI_API_KEY"),
-    base_url=os.getenv("OPENAI_BASE_URL"),
-    temperature=0,
-    # model_kwargs={
-    #     "extra_body": {
-    #         "thinking": {
-    #             "type": "disabled"
-    #         }
-    #     }
-    # }
+    api_key=os.environ.get("OPENAI_API_KEY"),
+    base_url=os.environ.get("OPENAI_BASE_URL"),
+    extra_body={
+        "thinking": {
+            "type": "disabled"
+        }
+    }
     ).with_structured_output(Structure, method="function_calling")
     print('Connect to:', model_name, file=sys.stderr)
     
